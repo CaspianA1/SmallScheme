@@ -3,7 +3,15 @@
 import Source.syntax as syntax
 
 def tokenize(chars: str) -> list:
-	return chars.replace('(', ' ( ').replace(')', ' ) ').split()
+	tokens = chars.replace('(', ' ( ').replace(')', ' ) ').split()
+	# non-list symbol support
+	for index, token in enumerate(tokens):
+		if token != "'" and token.startswith("'"):
+			tokens[index] = "'"
+			tokens.insert(index + 1, token[1:])
+	return tokens
+
+
 
 def parse(program: str) -> list:
 	return read_from_tokens(tokenize(program))

@@ -1,6 +1,7 @@
 # standard_library.py
 
 import os
+from Source.special_types import *
 
 def sub(*nums):
 	result = nums[0]
@@ -38,10 +39,23 @@ def read_file(file_name, data):
 	return -1
 
 def display(data):
-	data = str(data)
-	if data.startswith("'"): print(data[1:])
-	else: print(data)
+	print(data)
 
+def car(lst_obj):
+	if not isinstance(lst_obj, SchemeList):
+		raise ValueError(f"'{lst_obj}' is not a list.")
+	return lst_obj.num_list[0]
+
+def cdr(lst_obj):
+	if not isinstance(lst_obj, list):
+		raise ValueError(f"'{lst_obj}' is not a list.")
+	return lst_obj.num_list[1:]
+
+def cons(var, lst_obj):
+	if not isinstance(lst_obj, list):
+		raise ValueError(f"'{lst_obj}' is not a list.")
+	lst_obj = lst_obj.insert(0, var)
+	return lst_obj
 
 ENVIRONMENT = {
 	"+": lambda *nums: sum(nums),
@@ -59,6 +73,11 @@ ENVIRONMENT = {
 	"write-file!": write_file,
 	"append-file!": append_file,
 	"read-file!": read_file,
-	"shell!": lambda command: os.popen(command).read(),
-}
+	"shell!": lambda command: os.popen(command).read(),  # support strings as commands
+	"car": car,
+	"cdr": cdr,
+	"cons": cons
+	# add a include keyword to import a file
+	# map, reduce, and filter
+}	
 
