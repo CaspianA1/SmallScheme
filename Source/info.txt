@@ -1,4 +1,0 @@
-https://ruslanspivak.com/lsbasi-part7/
-
-visualize trees:
-http://graphviz.org/
