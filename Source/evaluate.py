@@ -95,8 +95,6 @@ def evaluate(parsed_code):
 
 	procedure = find_var(procedure_name)
 
-	print("Procedure and arguments:", procedure, arguments)
-
 	if isinstance(procedure, str):
 		raise TypeError(f"{procedure} is not a procedure")
 
